@@ -12,35 +12,132 @@
 <body>
   <h1>Lab 5</h1>
   <h3>Student Name: Christian Morini </h3>
-  
+
 <b>Problem 1</b><br>
 <script>
 // answer problem 1 here
+class Student {
+    // Constructor to initialize the properties
+    constructor(name, major, gpa, classesTaken) {
+        this.name = name;
+        this.major = major;
+        this.gpa = gpa;
+        this.classesTaken = classesTaken;
+    }
 
+    // Method to display all properties
+    displayProperties() {
+        document.writeln(`Name: ${this.name}<br>`);
+        document.writeln(`Major: ${this.major}<br>`);
+        document.writeln(`GPA: ${this.gpa}<br>`);
+        document.writeln(`Classes Taken: ${this.classesTaken.join(', ')}<br>`);
+    }
+  }
+
+  // Create an object of type Student
+const student = new Student(
+    "Christian Morini",
+    "IT - Programming and Development",
+    3.0,
+    ["IT-1025", "IT-2310", "IT-1050"]
+);
+
+// Call the method to display properties
+student.displayProperties();
 </script>
 
 <hr><b>Problem 2</b><br>
 <script>
 // answer problem 2 here
 
+// Create a Course object
+const Course = {
+    courseId: "IT-2320",
+    title: "IT-2320",
+    crsDesc: "Interactive Internet Programming",
+    creditHrs: "4",
+
+ // Method to display course properties
+ displayCourse: function() {
+        const keys = Object.keys(this); // Get all property names (keys)
+        const values = Object.values(this); // Get all property values
+
+        // Loop through the properties and display the name and value
+        keys.forEach((key, index) => {
+            const value = values[index]; // Get the corresponding value
+            // Check if the value is not a function to exclude methods from being displayed
+            if (typeof value !== 'function') {
+                document.writeln(`${key}: ${value}<br>`); // Output the property name and value
+            }
+        });
+    }
+};
+ // Call the method to display course properties
+ Course.displayCourse();
 </script>
 
-<hr><b>Problem 2</b><br>
+<hr><b>Problem 3</b><br>
 <script>
 // answer problem 3 here
+const planet = {
+  name: "Mercury",
+  diameterMiles: 3031.9
+};
+
+// Add a new property to the planet object
+planet.millMilesFromEarth = 48;
+
+ // Output each property value
+ document.writeln('Planet Name: ' + planet.name + '<br>');
+ document.writeln('Diameter (Miles): ' + planet.diameterMiles + '<br>');
+ document.writeln('Miles from Earth: ' + planet.millMilesFromEarth + '<br>');
 
 </script>
-  
+
 <hr><b>Problem 4</b><br>
 <script>
 // answer problem 4 here
-  
+document.writeln("Check the console to see the output!");
+ // Create a set called favoriteLanguages
+ const favoriteLanguages = new Set();
+
+// Add values to the set
+favoriteLanguages.add("JavaScript");
+favoriteLanguages.add("Python");
+favoriteLanguages.add("C++");
+favoriteLanguages.add("Java");
+
+// Output all values
+for (let language of favoriteLanguages) {
+    console.log(language);
+}
+
 </script>
-  
+
 <hr><b>Problem 5</b><br>
 <script>
 // answer problem 5 here
+// Create a Map
+const creditHrs = new Map();
 
+// Store course numbers and corresponding credit hours
+creditHrs.set("IT-1025", 3);
+creditHrs.set("IT-1050", 3);
+creditHrs.set("IT-2310", 3);
+creditHrs.set("IT-2320", 4);
+creditHrs.set("IT-2030", 4);
+creditHrs.set("IT-2351", 4);
+creditHrs.set("IT-2650", 4);
+
+// Use get() to find the credit hours for IT-2030
+const it2030Credits = creditHrs.get("IT-2030");
+document.writeln(`Credit hours for IT-2030: ${it2030Credits}<br>`);
+
+// Output all values
+document.writeln("All course credit hours:<br>");
+creditHrs.forEach((credits, course) => {
+    document.writeln(`${course}: ${credits}<br>`);
+});
 </script>
 
 
