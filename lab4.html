@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Lab 4</title>
+  <style>*{font-family:Roboto,Helvetica,Arial,sans-serif;}body{padding:10px;}</style>
+</head>
+
+<body>
+  <h1>Lab 4</h1>
+  <h3>Student Name: Christian Morini </h3>
+<script>
+  // 1 - Create an Array named trees with the following values: Sugar Maple, Red Maple, Red Oak, American Beech, Flowering Dogwood, Eastern Redbud
+  let trees = ['Sugar Maple', 'Red Maple', 'Red Oak', 'American Beech', 'Flowering Dogwood', 'Eastern Redbud'];
+
+
+  // 2 - Output the Array values using a for loop
+  document.writeln('<br><br>For Loop Output:<br>');
+  for (let i = 0; i < trees.length; i++) {
+    document.writeln(trees[i] + '<br>');
+  }
+
+  // 3 - pop() the last value and then output the Array using document.writeln(trees);
+  trees.pop();
+  document.writeln('<br>After pop() the last value:<br>');
+  document.writeln(trees.join(", ") + '<br>');
+
+  // 4 - push() the value 'Magnolia' onto the Array and output it using document.writeln(trees);
+  trees.push('Magnolia');
+  document.writeln('<br>After push(\'Magnolia\'):<br>');
+  document.writeln(trees.join(", ") + '<br>');
+
+  // 5 - Output the length of the array using the length property
+  document.writeln('<br>Array length:<br>');
+  document.writeln(trees.length + '<br>');
+
+  // 6 - Sort the array and then output the all of the values
+  trees.sort();
+  document.writeln('<br>After sorting:<br>');
+  document.writeln(trees.join(", ") + '<br>');
+
+  // 7 - Create an array called numbers with the following values: 4, 8, 2, 9, 10, 12, 3, 5
+  let numbers = [4, 8, 2, 9, 10, 12, 3, 5];
+
+  // 8 - Use a loop to calculate average. Output the average using document.writeln()
+  let sum = 0;
+
+  for (let i = 0; i < numbers.length; i++) {
+    sum += numbers[i];  // Add each number to sum
+  }
+
+  let average = sum / numbers.length;  // Calculate average
+  document.writeln('<br>Average of numbers:<br>');
+  document.writeln(average + '<br>');
+
+
+  // 9 - Use a loop to calculate sum. Output the final sum using document.writeln()
+  let totalSum = 0;
+
+  for (let i = 0; i < numbers.length; i++) {
+    totalSum += numbers[i];  // Add each number to totalSum
+  }
+
+  // 10 - Sort the array and output the values in numbers
+  numbers.sort(function(a, b) {
+    return a - b;  // Sort in ascending numerical order
+  });
+
+  document.writeln('<br>Sorted numbers:<br>');
+  document.writeln(numbers.join(", ") + '<br>');  // Output sorted values with spaces after commas
+
+</script>
+</body>
+
+</html>
