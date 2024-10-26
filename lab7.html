@@ -1,142 +1,145 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Lab 5</title>
-  <style>
-    * {
-      font-family: Roboto, Helvetica, Arial, sans-serif;
-    }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lab 7 Combined</title>
 
-    body {
-      padding: 10px;
-    }
-
-    .ml2 {
-      font-weight: 900;
-      font-size: 2em;
-    }
-
-    .ml2 .letter {
-      display: inline-block;
-      line-height: 1em;
-    }
-  </style>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
-</head>
-
-
-
-<h1>Lab 7</h1>
-<h3>Student Name: Christian Morini </h3>
-
-<script>
-  function validateForm(event) {
-    const nameInput = document.getElementById('name').value;
-    const errorMessage = document.getElementById('error-message');
-
-    // Clear previous error message
-    errorMessage.textContent = "";
-
-    // Check if the name input is empty
-    if (nameInput.trim() === '') {
-      event.preventDefault(); // Prevent form submission
-      alert("Name input is required.");
-      // Instead of using an alert, we can display the message directly on the screen.
-      // errorMessage.textContent = "Name input is required."; // Error message
-      // errorMessage.style.color = "red"; // Style the error message with red color
-    } else {
-      alert("Form submitted successfully! Name: " + nameInput);
-    }
-  }
-</script>
-</head>
-
-<body>
-  <h3>Problem 1</h3>
-  <p>Check the name input element to make sure that the field is not empty when the form is submitted. If it is empty,
-    use JavaScript to display an error message on the page that says, "Name input is required."</p>
-
-  <form onsubmit="validateForm(event)">
-    <b>Name</b>
-    <input type="text" id="name" name="name">
-    <input type="submit" value="Submit Name">
-  </form>
-  <div id="error-message"></div>
-  <br /><br />
-
-
-
-  <h3>Problem 2</h3>
-  Use the input element with name="email". Important! Do not use HTML validation!
-  You have to use JavaScript. Develop a JavaScript function that takes an input string
-  (supposedly an email address) as an argument and validates if it conforms to the standard email format. The
-  function should check for the presence of "@" symbol, domain name, and top-level domain (TLD) according to
-  common email address patterns. Call the function to validate a single html form element on the page that allows an
-  email input.
-  Example: If the user inputs "example@email" without a valid TLD (e.g., ".com", ".org"), the function should
-  return false indicating an invalid email format. <br /><br />
   <script>
-    function validateEmail(email) {
-      // Basic validation pattern for email
-      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return emailPattern.test(email);
+    // Function for Problem 1: Validate Name Input
+    function validateNameForm(event) {
+      const nameInput = document.getElementById('name').value;
+      if (nameInput.trim() === '') {
+        event.preventDefault();
+        alert("Name input is required.");
+      } else {
+        alert("Form submitted successfully! Name: " + nameInput);
+      }
     }
 
-    function validateForm(event) {
+    // Function for Problem 2: Validate Email Input
+    function validateEmailForm(event) {
       const emailInput = document.getElementById('email').value;
-
-      // Validate the email
-      if (!validateEmail(emailInput)) {
-        event.preventDefault(); // Prevent form submission
-        alert("Invalid email format. Please enter a valid email address."); // Show error alert
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailPattern.test(emailInput)) {
+        event.preventDefault();
+        alert("Invalid email format. Please enter a valid email address.");
       } else {
-        alert("Email submitted successfully: " + emailInput); // Show success alert
+        alert("Email submitted successfully: " + emailInput);
+      }
+    }
+
+    // Function for Problem 3: Validate Password
+    function validatePasswordForm(event) {
+      const passwordInput = document.getElementById('password').value;
+      const errorMessage = document.getElementById('error-message-password');
+      errorMessage.innerHTML = ""; // Clear previous error message
+
+      const requirements = [];
+      if (passwordInput.length < 8) {
+        requirements.push("- At least 8 characters in length.");
+      }
+      if (!/[!.,]/.test(passwordInput)) {
+        requirements.push("- Contains at least one of the following characters: !, ., or ,.");
+      }
+      if (!/[A-Z]/.test(passwordInput)) {
+        requirements.push("- Contains at least one uppercase letter.");
+      }
+      if (!/[a-z]/.test(passwordInput)) {
+        requirements.push("- Contains at least one lowercase letter.");
+      }
+      if (!/[0-9]/.test(passwordInput)) {
+        requirements.push("- Contains at least one numeric digit.");
+      }
+
+      if (requirements.length > 0) {
+        event.preventDefault();
+        errorMessage.innerHTML = "Password does not meet requirements:<br>" + requirements.join("<br>");
+      }
+      if (errorMessage.innerHTML === "") {
+        setTimeout(() => {
+          alert("Password submitted successfully!"); // Show success alert only after clearing the error message.
+        }, 0);
+      }
+    }
+
+    // Function for Problem 4: Validate First Name, Last Name, and Favorite Language
+    function validateFormFavLang(event) {
+      event.preventDefault();
+      const fname = document.getElementById('fname').value.trim();
+      const lname = document.getElementById('lname').value.trim();
+      const favlang = document.getElementById('favlang').value;
+
+      const errorMessage = document.getElementById('error-message-favlang');
+      errorMessage.innerHTML = ""; // Clear previous messages
+
+      if (fname === '') {
+        errorMessage.innerHTML += "First name is required.<br>";
+      }
+      if (lname === '') {
+        errorMessage.innerHTML += "Last name is required.<br>";
+      }
+      if (favlang === "Select a Favorite Language") {
+        errorMessage.innerHTML += "Please select a favorite programming language.<br>";
+      }
+
+      if (errorMessage.innerHTML === "") {
+        setTimeout(() => {
+          alert("Form submitted successfully!\nFirst Name: " + fname + "\nLast Name: " + lname + "\nFavorite Language: " + favlang);
+        }, 0);
       }
     }
   </script>
-  <form onsubmit="validateForm(event)">
-    <b>Email</b><br />
-    <input type="email" id="email" name="email"> <!-- Email input without HTML validation -->
-    <br /><br />
+</head>
+
+<body>
+  <h1>Lab 7</h1>
+  <h3>Student Name: Christian Morini</h3>
+
+  <h3>Problem 1</h3>
+  <form onsubmit="validateNameForm(event)">
+    <label for="name"><b>Name:</b></label><br>
+    <input type="text" id="name" name="name"><br><br>
+    <input type="submit" value="Submit Name">
+  </form>
+
+  <h3>Problem 2</h3>
+  <form onsubmit="validateEmailForm(event)">
+    <label for="email"><b>Email:</b></label><br>
+    <input type="text" id="email" name="email"><br><br>
     <input type="submit" value="Submit Email">
   </form>
 
-  <!-- Error message display -->
-  <div id="error-message" style="display: none; color: red;"></div>
-
-  <!-- Success message display -->
-  <div id="success-message" style="display: none; color: green;"></div>
-
-  <br /><br />
-
-
-
   <h3>Problem 3</h3>
-  Create a HTML form with a password field and implement JavaScript code to ensure that the password meets
-  certain criteria including: 1) At least 8 characters in length, 2) contains 1 of the following characters
-  ! [ ., 3) has at least 1 uppercase 4) has at least 1 lowercase letter, and 5) contains at least 1 numeric digit.
-  If the password does not meet the criteria, display an error message on the page that says, "Password does not meet
-  requirement: " and display the requirement that it doesn&#39;t meet.<br /><br />
-
-
-
-  Password<br />
-
-  <br /><br />
-
+  <form onsubmit="validatePasswordForm(event)">
+    <label for="password"><b>Password:</b></label><br>
+    <input type="password" id="password" name="password"><br><br>
+    <input type="submit" value="Submit Password">
+  </form>
+  <div id="error-message-password" style="color: red;"></div>
 
 
   <h3>Problem 4</h3>
-
-
-
-  Create an HTML form that accepts first name (name and id=fname), last name (name and id=lname),
-  and select list with favorite programming languages (name and id=favlang).
-  In the select list, the first option should be "Select a Favorite Language". Make sure
-  that one of the languages, not this option, is selected before submitting the form. Also, make sure
-  that first and last name are not empty.
+  <form onsubmit="validateFormFavLang(event)">
+    <label for="fname"><b>First Name:</b></label><br>
+    <input type="text" id="fname" name="fname"><br><br>
+    <label for="lname"><b>Last Name:</b></label><br>
+    <input type="text" id="lname" name="lname"><br><br>
+    <label for="favlang"><b>Favorite Programming Language:</b></label><br>
+    <select id="favlang" name="favlang">
+      <option value="Select a Favorite Language">Select a Favorite Language</option>
+      <option value="JavaScript">JavaScript</option>
+      <option value="Python">Python</option>
+      <option value="Java">Java</option>
+      <option value="C#">C#</option>
+      <option value="Ruby">Ruby</option>
+      <option value="PHP">PHP</option>
+    </select><br><br>
+    <input type="submit" value="Submit">
+  </form>
+  <br />
+  <div id="error-message-favlang" style="color: red;"></div>
 </body>
-<br /><br />
+
+</html>
