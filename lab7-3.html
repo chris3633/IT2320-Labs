@@ -1,15 +1,87 @@
-<html>
-  <head>
-    <title>Lab 7 - Problem 3</title>
-    <style>*{font-family:Roboto,Helvetica,Arial,sans-serif;}body{padding:10px;}</style>
-  </head>
-  <body>
-    <h1>Lab 7 - Problem 3</h1>
-    Create a HTML form with a password field and implement JavaScript code to ensure that the password meets certain criteria including: 1) At least 8 characters in length, 2) contains 1 of the following characters ! [ ., 3) has at least 1 uppercase 4) has at least 1 lowercase letter, and 5) contains at least 1 numeric digit. If the password does not meet the criteria, display an error message on the page that says, "Password does not meet requirement: " and display the requirement that it doesn't meet.<br><br>
-    <form method="POST" action="./index.php">
+<!DOCTYPE html>
+<html lang="en">
 
-      <br><br>
-      <input type="submit" value="Submit Password">
-    </form>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Validation</title>
+  <script>
+    function validatePassword(password) {
+      const requirements = [];
+      // Check if password is at least 8 characters
+      if (password.length < 8) {
+        requirements.push("- At least 8 characters in length.");
+      }
+      // Check if password contains at least one special character
+      if (!/[!.,]/.test(password)) {
+        requirements.push("- Contains at least one of the following characters: !, ., or ,.");
+      }
+      // Check if password has at least one uppercase letter
+      if (!/[A-Z]/.test(password)) {
+        requirements.push("- Contains at least one uppercase letter.");
+      }
+      // Check if password has at least one lowercase letter
+      if (!/[a-z]/.test(password)) {
+        requirements.push("- Contains at least one lowercase letter.");
+      }
+      // Check if password contains at least one numeric digit
+      if (!/[0-9]/.test(password)) {
+        requirements.push("- Contains at least one numeric digit.");
+      }
+
+      return requirements; // Return an array of unmet requirements
+    }
+
+    function validateForm(event) {
+      const passwordInput = document.getElementById('password').value;
+      const errorMessage = document.getElementById('error-message');
+
+      // Clear previous error message
+      errorMessage.textContent = "";
+
+      // Validate the password
+      const requirements = validatePassword(passwordInput);
+      if (requirements.length > 0) {
+        event.preventDefault(); // Prevent form submission
+        errorMessage.innerHTML = "Password does not meet requirement:<br>" + requirements.join("<br>"); // Display all theunmet requirements
+        errorMessage.style.color = "red"; // Set error message color
+      } else {
+        errorMessage.innerHTML = ""; // Clear any existing error message
+        setTimeout(() => {
+          alert("Password submitted successfully!"); // Show success alert only after clearing the error message.
+        }, 0);
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Lab 7-3</h1>
+  <h3>Student Name: Christian Morini</h3>
+  <h3>Problem 3</h3>
+  <p>Create a HTML form with a password field and implement JavaScript code to ensure that the password meets certain
+    criteria including:
+  <ul>
+    <li>At least 8 characters in length</li>
+    <li>Contains 1 of the following characters ! [ .,</li>
+    <li>Has at least 1 uppercase </li>
+    <li>Has at least 1 lowercase letter </li>
+    <li>Contains at least 1 numeric digit</li>
+  </ul>
+  </p>
+
+  <form onsubmit="validateForm(event)">
+    <b>Password</b><br />
+    <input type="password" id="password" name="password" required>
+    <br /><br />
+    <input type="submit" value="Submit Password">
+  </form>
+
+  <!-- Error message display -->
+  <br />
+  <div id="error-message"></div>
+
+  <br /><br />
+</body>
+
 </html>

@@ -1,16 +1,49 @@
-<html>
-  <head>
-    <title>Lab 7 - Problem 2</title>
-    <style>*{font-family:Roboto,Helvetica,Arial,sans-serif;}body{padding:10px;}</style>
-  </head>
-  <body>
-    <h1>Lab 7 - Problem 2</h1>
-    Add an HTML input element to accept an email address. Develop a JavaScript function that takes an input string (supposedly an email address) as an argument and validates if it conforms to the standard email format. The function should check for the presence of "@" symbol, domain name, and top-level domain (TLD) according to common email address patterns. Call the function to validate a single html form element on the page that allows an email input.
-    Example: If the user inputs "example@email" without a valid TLD (e.g., ".com", ".org"), the function should return false indicating an invalid email format. <br><br>
-    <form method="POST" action="./index.php">
-      
-      <br><br>
-      <input type="submit" value="Submit Email">
-    </form>
-  </body>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Email Validation</title>
+  <script>
+    function validateEmail(email) {
+      // Validation pattern for email
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailPattern.test(email);
+    }
+
+    function validateForm(event) {
+      const emailInput = document.getElementById('email').value;
+
+      // Validate the email
+      if (!validateEmail(emailInput)) {
+        event.preventDefault(); // Prevent form submission
+        alert("Invalid email format. Please enter a valid email address."); // Show error alert
+      } else {
+        alert("Email submitted successfully: " + emailInput); // Show success alert
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <h1>Lab 7-2</h1>
+  <h3>Student Name: Christian Morini</h3>
+  <h3>Problem 2</h3>
+  <p>Use the input element with name="email". Important! Do not use HTML validation! You have to use JavaScript. Develop
+    a JavaScript function that takes an input string (supposedly an email address) as an argument and validates if it
+    conforms to the standard email format. The function should check for the presence of "@" symbol, domain name, and
+    top-level domain (TLD) according to common email address patterns. Example: If the user inputs "example@email"
+    without a valid TLD (e.g., ".com", ".org"), the function should return false indicating an invalid email format.</p>
+
+  <form onsubmit="validateForm(event)">
+    <b>Email</b><br />
+    <input type="text" id="email" name="email">
+    <br /><br />
+    <input type="submit" value="Submit Email">
+  </form>
+
+  <br /><br />
+</body>
+
 </html>

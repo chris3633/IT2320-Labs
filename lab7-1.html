@@ -1,15 +1,41 @@
-<html>
-  <head>
-    <title>Lab 7 - Problem 1</title>
-    <style>*{font-family:Roboto,Helvetica,Arial,sans-serif;}body{padding:10px;}</style>
-  </head>
-  <body>
-    <h1>Lab 7 - Problem 1</h1>
-    Check the name input element to make sure that the field is not empty when the form is submitted. If it is empty, use JavaScript to display an error message on the page that says, "Name input is required."<br><br>
-    <form method="POST" action="./index.php">
-      <b>Name</b> <br><input type="text" id="name" name="name">
-      <br><br>
-      <input type="submit" value="Submit Name">
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab 7-1</title>
+    <script>
+        function validateForm(event) {
+            const nameInput = document.getElementById('name').value;
+
+            // Check if the name input is empty
+            if (nameInput.trim() === '') {
+                event.preventDefault(); // Prevent form submission
+                alert("Name input is required."); // Alert for empty name input
+            } else {
+                alert("Form submitted successfully! Name: " + nameInput); // Alert for successful submission
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Lab 7-1</h1>
+    <h3>Student Name: Christian Morini</h3>
+
+    <h3>Problem 1</h3>
+    <p>Check the name input element to make sure that the field is not empty when the form is submitted. If it is empty,
+        use JavaScript to display an error message.</p>
+
+    <form onsubmit="validateForm(event)">
+        <b>Name</b><br />
+        <input type="text" id="name" name="name">
+        <br /><br />
+        <input type="submit" value="Submit Name">
     </form>
-  </body>
+
+    <br /><br />
+</body>
+
 </html>
