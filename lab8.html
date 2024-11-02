@@ -5,16 +5,98 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Lab 8</title>
-  <style>*{font-family:Roboto,Helvetica,Arial,sans-serif;}body{padding:10px;} a { font-size:1.2em; }</style>
+  <style>
+    * {
+      font-family: Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      padding: 10px;
+    }
+
+    a {
+      font-size: 1.2em;
+    }
+  </style>
+
+  <script>
+    // Update the title on page load
+    window.onload = function () {
+      // 1. Display 'Lab 8 - Events' in the h1 with id="title
+      document.getElementById("title").textContent = "Lab 8 - Events";
+
+
+      // 2. Add click event to the button
+      document.getElementById("button").onclick = function () {
+        document.getElementById("problem2").textContent = "Problem 2 - Button Clicked";
+      };
+
+      // 3. Display input value in real-time
+      document.getElementById("input").addEventListener("input", function () {
+        document.getElementById("problem3").textContent = this.value;
+      });
+
+      // 4. Add click event to show an alert
+      document.getElementById("paragraph").onclick = function () {
+        alert("Problem 4 - Paragraph Clicked");
+      };
+
+      // 5. Track button clicks
+      let clickCount = 0; // Variable to keep track of the number of clicks
+
+      document.getElementById("button5").onclick = function () {
+        clickCount++; // Increment the click count
+        document.getElementById("problem5").textContent = clickCount; // Display the count in the div
+      };
+
+    };
+
+  </script>
+
 </head>
 
+<!--
+Updated Problems 3 and 5:
+Replaced <div> with <span> to display output inline rather than in a block format.
+This change makes it so the output shows up right next to the input and button labels, making it look cleaner and easier to read.
+-->
+
 <body>
-  <h1>Lab 8</h1>
-  <h3>Student Name: </h3>
-  <a href="lab8-1.html">Problem 1</a><br><br>
-  <a href="lab8-2.html">Problem 2</a><br><br>
-  <a href="lab8-3.html">Problem 3</a><br><br>
-  <a href="lab8-4.html">Problem 4</a><br><br>
+  <h1 id="title"></h1>
+  <h3>Student Name: Christian Morini </h3>
+  <p>
+    1. When the page loads, display 'Lab 8 - Events' in the h1 with id="title".
+  </p>
+
+  <p>
+    2. When the user clicks a button with id="button", display 'Problem 2 - Button Clicked' in the div with
+    id="problem2".
+    <br><br>
+    <button id="button">Click Me</button>
+  <div id="problem2"></div>
+  </p>
+
+  <p>
+    3. As the user types in the input with id="input", display the value of the input in the div with id="problem3".
+    <br><br>
+    Input = <input type="text" id="input">
+    <br><br>Output =
+    <span id="problem3"></span>
+  </p>
+
+  <p id="paragraph">
+    4. When a user clicks on this paragraph element, popup an alert message that says, "Problem 4 - Paragraph Clicked"."
+  </p>
+
+  <p>
+    5. When a user clicks on a button with id="button5", add 1 to a page variable keeping track of how many times
+    the button was clicked. Display the value of the variable in the div with id="problem5".
+    <br><br>
+    <button id="button5">Click Me</button> Times Clicked =
+    <span id="problem5"></span>
+  </p>
+
+
 </body>
 
 </html>
