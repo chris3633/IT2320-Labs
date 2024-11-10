@@ -5,16 +5,133 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>Lab 9</title>
-  <style>*{font-family:Roboto,Helvetica,Arial,sans-serif;}body{padding:10px;} a { font-size:1.2em; }</style>
+  <style>
+    * {
+      font-family: Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      padding: 10px;
+    }
+
+    a {
+      font-size: 1.2em;
+    }
+
+    .red-box {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  </style>
 </head>
 
 <body>
   <h1>Lab 9</h1>
-  <h3>Student Name: </h3>
-  <a href="lab9-1.html">Problem 1</a><br><br>
-  <a href="lab9-2.html">Problem 2</a><br><br>
-  <a href="lab9-3.html">Problem 3</a><br><br>
-  <a href="lab9-4.html">Problem 4</a><br><br>
+  <h3>Student Name: Christian Morini</h3>
+
+  <h3>Problem 1</h3>
+  <button id="problem1">Change paragraph text color</button>
+  <p>Text for problem 1.</p>
+  <script>
+    // Identify the button
+    const button = document.getElementById('problem1');
+
+    // Attach a click event listener to the button
+    button.addEventListener('click', function () {
+      // Identify the paragraph element and change its text color
+      const paragraph = document.querySelector('p');
+      paragraph.style.color = 'red';
+    });
+  </script>
+
+  <h3>Problem 2</h3>
+  <div id="redbox" class="red-box"></div>
+  <script>
+    // Identify the box element
+    const box = document.getElementById('redbox');
+
+    // Initial position (starting from the top-right)
+    let positionTop = 0;
+    let positionLeft = window.innerWidth - box.offsetWidth;
+
+    // Apply initial position
+    box.style.top = positionTop + 'px';
+    box.style.left = positionLeft + 'px';
+
+    // Use setInterval to move the box
+    const intervalId = setInterval(function () {
+      // Update the position
+      positionTop += 1;
+      positionLeft -= 1;
+
+      // Apply the new position
+      box.style.top = positionTop + 'px';
+      box.style.left = positionLeft + 'px';
+
+      // Stop the animation if the box reaches the left or bottom edge of the window
+      if (positionTop > window.innerHeight - box.offsetHeight || positionLeft < 0) {
+        clearInterval(intervalId);
+      }
+    }, 10);
+  </script>
+
+  <h3>Problem 3</h3>
+  <h4 id="heading">Heading Element</h4>
+  <button id="toggleheading">Show/Hide Heading</button>
+  <script>
+    // Identify the heading and button elements
+    const heading = document.getElementById('heading');
+    const toggleButton = document.getElementById('toggleheading');
+
+    // Attach a click event listener to the button
+    toggleButton.addEventListener('click', function () {
+      // Toggle the visibility of the heading element
+      if (heading.style.display === 'none') {
+        heading.style.display = 'block'; // Visible
+      } else {
+        heading.style.display = 'none'; // Hidden
+      }
+    });
+  </script>
+
+  <h3>Problem 4</h3>
+  <p>
+    <input type="text" id="itemInput" placeholder="Enter list item text">
+    <button id="addItem">Add Item</button>
+    <button id="removeItem">Remove Last Item</button>
+
+  <ul id="itemList"></ul>
+
+  <script>
+    // Elements
+    const addItemButton = document.getElementById('addItem');
+    const removeItemButton = document.getElementById('removeItem');
+    const itemInput = document.getElementById('itemInput');
+    const itemList = document.getElementById('itemList');
+
+    // Function to add item to the list
+    addItemButton.addEventListener('click', function () {
+      const itemText = itemInput.value;
+      if (itemText.trim() !== '') { // Check for non-empty input
+        const listItem = document.createElement('li'); // Create a new list item
+        listItem.textContent = itemText;
+        itemList.appendChild(listItem); // Append item to the list
+        itemInput.value = ''; // Clear the input field
+      }
+    });
+
+    // Function to emove the last item from the list
+    removeItemButton.addEventListener('click', function () {
+      if (itemList.lastChild) { // Check if there's an item to remove
+        itemList.removeChild(itemList.lastChild); // Remove the last item
+      }
+    });
+  </script>
+  </p>
 </body>
 
 </html>
