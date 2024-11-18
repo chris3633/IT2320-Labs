@@ -1,22 +1,158 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Lab 11</title>
-    <style>*{font-family:Roboto,Helvetica,Arial,sans-serif;}body{padding:10px;} a { font-size:1.2em; }</style>
-  </head>
-  <body>
-    <h1>Lab 11</h1>
-    <h3>Student Name: </h3>
-    <p>
-      AJAX Response:<br>
-      <div id="ajax"></div>
-    </p>
-    <p>
-      Fetch Response:<br>
-      <div id="fetch"></div>
-    </p>
 
-  </body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Lab 11</title>
+  <style>
+    * {
+      font-family: Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      padding: 10px;
+    }
+
+    a {
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Lab 11</h1>
+  <h3>Student Name: Christian Morini </h3>
+  <p>
+    <b>Step 1</b>
+  <blockquote>Given the following: '{"id":"IT-2320", "credits":4, "title":"Interactive Internet Programming"}'<br><br>
+    Parse it to a JSON object called courseObj using JSON.parse().<br><br>Then, use the JavaScript object called
+    courseObj to output the title using document.writeln().<br><br>
+    <script>
+      // Solution 1
+      var jsonString = '{"id":"IT-2320", "credits":4, "title":"Interactive Internet Programming"}';
+      var courseObj = JSON.parse(jsonString);
+      document.writeln(courseObj.title);
+    </script>
+  </blockquote>
+  </p>
+  <p>
+    <b>Step 2</b>
+  <blockquote> Given:
+    const text = '[ "Document Object Model", "Language Constructs", "OOP", "Fetch API", "JSON" ]';<br><br>
+    First, use JSON.parse() to parse it to a JavaScript array.<br><br>Then, create a loop to output each of the values
+    in array using document.writeln() separated by a newline <br>.<br>
+    <script>
+      // Solution 2
+      const text = '[ "Document Object Model", "Language Constructs", "OOP", "Fetch API", "JSON" ]';
+      const courses = JSON.parse(text);
+
+      // Loop through the array and output each item
+      for (let i = 0; i < courses.length; i++) {
+        document.writeln(courses[i] + '<br>');
+      }
+    </script>
+  </blockquote>
+  </p>
+  <p>
+    <b>Step 3</b>
+  <blockquote>Given:
+    const myJSON = '{"id":"IT-2320", "credits":4, "title":"Interactive Internet Programming",
+    "description":"JavaScript"}';<br><br>Use JSON.parse() to parse it to an object.<br><br>Use dot (.) notation to
+    movidy the value of description to "An Introduction to JavaScript".<br><br>Use dot (.) notation to output all of the
+    values using a single document.writeln() statement.<br><br>
+    <script>
+      // Solution 3
+      const myJSON = '{"id":"IT-2320", "credits":4, "title":"Interactive Internet Programming", "description":"JavaScript"}';
+      const courseObj = JSON.parse(myJSON);
+
+      // Modify the description value
+      courseObj.description = "An Introduction to JavaScript";
+
+      // Output all values using document.writeln()
+      document.writeln("ID: " + courseObj.id + "<br>Credits: " + courseObj.credits + "<br>Title: " + courseObj.title + "<br>Description: " + courseObj.description);
+    </script>
+  </blockquote>
+  </p>
+  <p>
+    <b>Step 4</b>
+  <blockquote>Create an array (called courseArray) and JSON string (called courseJSON) with the following values:
+    IT-1025, IT-2310, IT-2320.<br><br>Use any technique to output all of the values in both the array and JSON
+    string.<br><br>In a comment, explain the technique used.<br><br>
+    <script>
+      // Solution 4
+      const courseArray = ["IT-1025", "IT-2310", "IT-2320"];
+      const courseJSON = '["IT-1025", "IT-2310", "IT-2320"]';
+
+      // Output the array using a loop to iterate over each item
+      document.writeln("Array values: <br>");
+      for (let i = 0; i < courseArray.length; i++) {
+        document.writeln(courseArray[i] + "<br>");
+      }
+
+      // Output the JSON string by parsing it into an array and using a loop
+      const parsedCourseJSON = JSON.parse(courseJSON);
+      document.writeln("<br>JSON string values: <br>");
+      for (let i = 0; i < parsedCourseJSON.length; i++) {
+        document.writeln(parsedCourseJSON[i] + "<br>");
+      }
+    </script>
+  </blockquote>
+  </p>
+  <p>
+    <b>Step 5</b>
+  <blockquote id="course-list">
+    Using the "Array as JSON" example on https://www.w3schools.com/js/js_json_server.asp, read the values from
+    courses.txt.<br><br>Output all of the values in the array.<br><br>
+    <script>
+      // Solution 5
+      fetch('courses.txt')
+        .then(response => response.json())  // Parse the JSON data from the file
+        .then(courses => {
+          // Get the blockquote element to insert the courses in section 5 instead of at the end of the page
+          const blockquote = document.getElementById('course-list');
+
+          // Output all values in the array by appending them inside the blockquote
+          courses.forEach(course => {
+            const courseElement = document.createElement('p');  // Create a paragraph for each course
+            courseElement.textContent = course;  // Set the course name
+            blockquote.appendChild(courseElement);  // Append each paragraph inside the blockquote
+          });
+        })
+        .catch(error => {
+          console.error('Error fetching or parsing courses.txt:', error);
+        });
+    </script>
+  </blockquote>
+  </p>
+
+  <p>
+    <b>Step 6</b>
+  <blockquote id="title-block">
+    Using the "JSON From a Server" example on https://www.w3schools.com/js/js_json_server.asp, request JSON
+    from the file it1025.txt.<br><br>Output the value of title here:<br><br>
+    <script>
+      // Solution 6
+      fetch('it1025.txt')
+        .then(response => response.json())  // Parse the JSON data from the file
+        .then(data => {
+          // Get the blockquote element to insert the data in section 6 instead of at the end of the page
+          const blockquote = document.getElementById('title-block');
+
+          // Create a new paragraph element to display the title
+          const titleElement = document.createElement('p');
+          titleElement.textContent = "Title: " + data.title;  // Set the title
+
+          // Append the new paragraph inside the blockquote
+          blockquote.appendChild(titleElement);
+        })
+        .catch(error => {
+          console.error('Error fetching or parsing it1025.txt:', error);
+        });
+    </script>
+  </blockquote>
+  </p>
+  <br><br><br><br><br><br>
+</body>
+
 </html>
