@@ -1,69 +1,166 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
-<title>Lab 13</title>
-<style>*{font-family:Roboto,Helvetica,Arial,sans-serif;}body{padding:10px;} a { font-size:1.2em; }</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Lab 12</title>
+
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+
+  <!-- Toastr CSS -->
+  <link rel="stylesheet" type="text/css"
+    href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+  <!-- jQuery -->
+  <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!-- DataTables JS -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+
+  <!-- Toastr JS -->
+  <script type="text/javascript" charset="utf8"
+    src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+  <style>
+    * {
+      font-family: Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      padding: 10px;
+    }
+
+    a {
+      font-size: 1.2em;
+    }
+
+    /* Center the form container */
+    .form-container {
+      width: 60%;
+      margin: 0 auto;
+      /* Center the form on the page */
+    }
+
+    /* Style for input fields and button */
+    input[type="text"] {
+      padding: 8px;
+      width: 100%;
+      margin: 5px 0;
+      box-sizing: border-box;
+    }
+
+    button {
+      padding: 10px 20px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    /* Table styling */
+    table {
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    /* Style for DataTable header */
+    table th {
+      text-align: left;
+    }
+  </style>
+
+  <script>
+    $(document).ready(function () {
+      // Initialize DataTable
+      var table = $('#frameworkTable').DataTable();
+
+      // Pre-fill the table with Angular, React, and Vue.js
+      table.row.add([
+        'Angular',
+        '<a href="https://angular.io" target="_blank">Link</a>',
+        'A platform for building mobile and desktop web applications with a comprehensive set of tools.'
+      ]).draw();
+      table.row.add([
+        'React',
+        '<a href="https://reactjs.org" target="_blank">Link</a>',
+        'A JavaScript library for building user interfaces, primarily for single-page applications.'
+      ]).draw();
+      table.row.add([
+        'Vue.js',
+        '<a href="https://vuejs.org" target="_blank">Link</a>',
+        'A progressive JavaScript framework for building user interfaces, designed to be incrementally adoptable.'
+      ]).draw();
+
+      // Handle "Add Framework/API" button click
+      $('#add').click(function () {
+        // Get the values from input fields
+        var framework = $('#framework').val();
+        var link = $('#link').val();
+        var description = $('#description').val();
+
+        // Validate the three inputs
+        if (framework === '' || link === '' || description === '') {
+          alert('Please fill out all fields');
+          return;
+        }
+
+        // Add the new row to the DataTable
+        table.row.add([
+          framework,
+          '<a href="' + link + '" target="_blank">Link</a>',
+          description
+        ]).draw();
+
+        // Show a success message using Toastr
+        toastr.success('Framework/API added successfully!', 'Success');
+
+        // Clear the three input fields
+        $('#framework').val('');
+        $('#link').val('');
+        $('#description').val('');
+      });
+    });
+  </script>
+
 </head>
 
 <body>
-  <h1>Lab 13</h1>
-  <h3>Student Name: </h3>
-<p>
-  <b>Step 1</b>
-  <blockquote>Given the following: '{"id":"IT-2320", "credits":4, "title":"Interactive Internet Programming"}'<br><br>
-  Parse it to a JSON object called courseObj using JSON.parse().<br><br>Then, use the JavaScript object called courseObj to output the title using document.writeln().<br><br>
-  <script>
-  // Solution 1
-  </script>
-  </blockquote>
-</p>
-<p>
-  <b>Step 2</b>
-  <blockquote> Given:
-  const text = '[ "Document Object Model", "Language Constructs", "OOP", "Fetch API", "JSON" ]';<br><br>
-  First, use JSON.parse() to parse it to a JavaScript array.<br><br>Then, create a loop to output each of the values in array using document.writeln() separated by a newline <br>.<br>
-  <script>
-  // Solution 2
-  </script>
-  </blockquote>
-</p>
-<p>
-  <b>Step 3</b>
-  <blockquote>Given:
-  const myJSON = '{"id":"IT-2320", "credits":4, "title":"Interactive Internet Programming", "description":"JavaScript"}';<br><br>Use JSON.parse() to parse it to an object.<br><br>Use dot (.) notation to movidy the value of description to "An Introduction to JavaScript".<br><br>Use dot (.) notation to output all of the values using a single document.writeln() statement.<br><br>
-  <script>
-  // Solution 3
-  </script>
-  </blockquote>
-</p>
-<p>
-  <b>Step 4</b>
-  <blockquote>Create an array (called courseArray) and JSON string (called courseJSON) with the following values: IT-1025, IT-2310, IT-2320.<br><br>Use any technique to output all of the values in both the array and JSON string.<br><br>In a comment, explain the technique used.<br><br>
-  <script>
-  // Solution 4
-  </script>
-  </blockquote>
-</p>
-<p>
-  <b>Step 5</b>
-  <blockquote>Using the "Array as JSON" example on https://www.w3schools.com/js/js_json_server.asp, read the values from courses.txt.<br><br>Output all of the values in the array.<br><br>
-  <script>
-  // Solution 5
-  </script>
-  </blockquote>
-</p>
-<p>
-  <b>Step 6</b>
-  <blockquote>Using the "JSON From a Server" example on https://www.w3schools.com/js/js_json_server.asp, request JSON from the file it1025.txt.<br><br>Output the value of title using a document.writeln().<br><br>
-  <script>
-  // Solution 6
-  </script>
-  </blockquote>
-</p>
-  <br><br><br><br><br><br>
+  <h1 id="title">Lab 12: JavaScript Frameworks/API</h1>
+  <h3>Student Name: Christian Morini</h3>
+  <div class="form-container">
+    <h3>Add Framework/API</h3>
+    <p>
+      Framework<br>
+      <input type="text" id="framework">
+    </p>
+    <p>
+      Link<br>
+      <input type="text" id="link">
+    </p>
+    <p>
+      Description<br>
+      <input type="text" id="description">
+    </p>
+    <p>
+      <button id="add">Add Framework/API</button>
+    </p>
+  </div>
+
+  <h3>DataTable</h3>
+  <table id="frameworkTable" class="display">
+    <thead>
+      <tr>
+        <th>JavaScript Framework/API</th>
+        <th>Link</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Rows will be added dynamically here -->
+    </tbody>
+  </table>
 </body>
 
 </html>
